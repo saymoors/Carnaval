@@ -14,7 +14,7 @@ public class ParserYAML {
         yaml = new Yaml(options);
     }
 
-    public List<Participiant> parse(String filePath) {
+    public List<Participiant> parse(String filePath) throws Exception {
         try (InputStream inputStream = new FileInputStream(filePath)) {
             List<Map<String, Object>> listMap = yaml.load(inputStream);
             List<Participiant> result = new ArrayList<>();
@@ -26,8 +26,7 @@ public class ParserYAML {
             }
             return result;
         } catch (IOException e) {
-            System.err.println("Файл не найден!");
-            return new ArrayList<>();
+            throw new Exception("Файл не найден!");
         }
     }
 }
